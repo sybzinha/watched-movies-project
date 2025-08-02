@@ -1,0 +1,5 @@
+watched-movies-api/target/
+watched-movies-api/.idea/
+
+watched-movies-frontend/node_modules/
+watched-movies-frontend/build/
