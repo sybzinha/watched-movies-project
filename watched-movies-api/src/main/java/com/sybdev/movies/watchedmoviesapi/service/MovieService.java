@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import java.util.Optional;
-import java.util.List;
 
 @Service
 public class MovieService {
@@ -38,18 +37,6 @@ public class MovieService {
         return movieRepository.findById(id);
     }
 
-    public Optional<Movie> updateMovie(Long id, Movie updatedMovie) {
-        return movieRepository.findById(id)
-                .map(existingMovie -> {
-                    existingMovie.setTitle(updatedMovie.getTitle());
-                    existingMovie.setReleaseYear(updatedMovie.getReleaseYear());
-                    existingMovie.setGenre(updatedMovie.getGenre());
-                    existingMovie.setPersonalRating(updatedMovie.getPersonalRating());
-                    existingMovie.setPosterPath(updatedMovie.getPosterPath());
-                    return movieRepository.save(existingMovie);
-                });
-    }
-
     public boolean deleteMovie(Long id) {
         if (movieRepository.existsById(id)) {
             movieRepository.deleteById(id);
@@ -58,7 +45,7 @@ public class MovieService {
         return false;
     }
 
-    public Optional<Movie> partialUpdateMovie(Long id, Movie updatedMovie) {
+    public Optional<Movie> updateMovie(Long id, Movie updatedMovie) {
         return movieRepository.findById(id)
                 .map(existingMovie -> {
                     if (updatedMovie.getTitle() != null) {

@@ -31,15 +31,9 @@ public class MovieController {
         return movie.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie updatedMovie) {
-        Optional<Movie> movie = movieService.updateMovie(id, updatedMovie);
-        return movie.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
     @PatchMapping("/{id}")
-    public ResponseEntity<Movie> partialUpdateMovie(@PathVariable Long id, @RequestBody Movie movie) {
-        return movieService.partialUpdateMovie(id, movie)
+    public ResponseEntity<Movie> updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
+        return movieService.updateMovie(id, movie)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
