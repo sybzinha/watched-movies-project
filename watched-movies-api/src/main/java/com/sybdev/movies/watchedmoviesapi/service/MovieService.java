@@ -38,7 +38,6 @@ public class MovieService {
         return movieRepository.findById(id);
     }
 
-    // NOVO: Método para atualizar um filme  (put)
     public Optional<Movie> updateMovie(Long id, Movie updatedMovie) {
         return movieRepository.findById(id)
                 .map(existingMovie -> {
@@ -51,7 +50,6 @@ public class MovieService {
                 });
     }
 
-    // NOVO: Método para deletar um filme
     public boolean deleteMovie(Long id) {
         if (movieRepository.existsById(id)) {
             movieRepository.deleteById(id);
@@ -60,7 +58,6 @@ public class MovieService {
         return false;
     }
 
-    // Método para atualizar um filme (agora com lógica parcial)
     public Optional<Movie> partialUpdateMovie(Long id, Movie updatedMovie) {
         return movieRepository.findById(id)
                 .map(existingMovie -> {
