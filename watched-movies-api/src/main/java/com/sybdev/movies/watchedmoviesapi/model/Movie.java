@@ -1,5 +1,6 @@
 package com.sybdev.movies.watchedmoviesapi.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,4 +24,7 @@ public class Movie {
     private String genre;
     private int personalRating;
     private String posterPath;
+
+    @Column(columnDefinition = "TEXT")
+    private String overview;
 }

@@ -18,5 +18,7 @@ public class TmdbMovieResponse {
         private String title;
         private String release_date;
         private String poster_path;
+        private List<Integer> genre_ids;
+        private String overview;
     }
 }
