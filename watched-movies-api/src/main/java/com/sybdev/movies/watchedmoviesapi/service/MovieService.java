@@ -22,7 +22,6 @@ public class MovieService {
     private final String TMDB_MOVIE_SEARCH_URL = "https://api.themoviedb.org/3/search/movie";
     private final String TMDB_GENRES_URL = "https://api.themoviedb.org/3/genre/movie/list";
 
-    // Cache de gêneros para evitar múltiplas chamadas à API
     private List<GenreResponse.Genre> genreCache;
 
     public Movie saveMovie(Movie movie) {
@@ -32,7 +31,6 @@ public class MovieService {
             movie.setReleaseYear(Integer.parseInt(movieData.getRelease_date().substring(0, 4)));
             movie.setPosterPath(movieData.getPoster_path());
 
-            // Adicionado: Pega os IDs de gênero e traduz para nomes
             List<String> genreNames = getGenreNames(movieData.getGenre_ids());
             movie.setGenre(String.join(", ", genreNames));
 
@@ -89,14 +87,14 @@ public class MovieService {
         return null;
     }
 
-    // ... (métodos saveMovie, findAllMovies, findMovieById, updateMovie, deleteMovie) ...
-    // Mantenha os métodos de CRUD existentes
     public Iterable<Movie> findAllMovies() {
         return movieRepository.findAll();
     }
+
     public Optional<Movie> findMovieById(Long id) {
         return movieRepository.findById(id);
     }
+
     public Optional<Movie> updateMovie(Long id, Movie updatedMovie) {
         return movieRepository.findById(id).map(existingMovie -> {
             existingMovie.setPersonalRating(updatedMovie.getPersonalRating());
@@ -111,5 +109,4 @@ public class MovieService {
         }
         return false;
     }
-
 }
